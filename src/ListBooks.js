@@ -5,22 +5,23 @@ import Book from './Book'
 
 class ListBooks extends React.Component { 
 
-  constructor(props) {
-    super(props);
-  }
 
   updateCategory = (id,value) => {
        this.props.updateCategory(id,value);
   }  
 
   render() {
+
+    const {books} = this.props;
+    const {title} = this.props; 
+
     return (
                <div>
                 <div className="bookshelf">
-                  <h2 className="bookshelf-title">{this.props.title}</h2>
+                  <h2 className="bookshelf-title">{title}</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      {this.props.books.map((bookItem) => (
+                      {books.map((bookItem) => (
                       <li key={bookItem.id}>
                          <Book book={bookItem} updateCategory={this.updateCategory} />
                       </li>

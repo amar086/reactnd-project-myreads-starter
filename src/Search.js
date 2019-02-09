@@ -3,15 +3,10 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
+
 
 class Search extends React.Component { 
-
-  constructor(props) {
-    super(props); 
-    this.state = {
-        searchResults:[]
-    }
-  }  
 
   addToShelf = (id,value) => {
        this.props.addToShelf(id,value);
@@ -28,12 +23,13 @@ class Search extends React.Component {
         console.log(results);
         searchResults = results.filter((b) => b.imageLinks && b.imageLinks.thumbnail); 
         searchResults.map((resultItem) => {
-            let found = this.props.shelfBooks.filter((b) => b.id == resultItem.id);
+            let found = this.props.shelfBooks.filter((b) => b.id === resultItem.id);
             if(found && found.length > 0){
               resultItem.shelf = found[0].shelf;
             }else {
               resultItem.shelf = "none";
             }
+            return resultItem;
         });
       }
       this.setState({searchResults: searchResults});
@@ -83,5 +79,11 @@ class Search extends React.Component {
          )
   }
 }
+
+
+Search.propTypes = {
+    shelfBooks: PropTypes.array
+};
+
 
 export default Search

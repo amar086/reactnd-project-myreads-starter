@@ -1,20 +1,19 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import './App.css'
 import ListBooks from './ListBooks'
 import Search from './Search'
-import { Link, Route } from 'react-router-dom'
+import { Link, Route,Switch } from 'react-router-dom'
+
+import './App.css'
+
 
 class BooksApp extends React.Component { 
 
-
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
     BooksAPI.getAll().then((books) => {
         this.setState({books:books});
     });
-  } 
+  }
 
   getBooksByShelf = (shelf) => {
       return this.state && this.state.books ? this.state.books.filter((b) => b.imageLinks && b.imageLinks.thumbnail && b.shelf === shelf): [];
@@ -78,6 +77,8 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+
+      <Switch>
         <Route path="/search" exact render={() => (          
               <Search addToShelf={this.addToShelf} shelfBooks={this.state.books} /> 
         )}/>
@@ -97,6 +98,8 @@ class BooksApp extends React.Component {
             </div>
           </div>
           )}/>
+        </Switch>
+
       </div>
       )
 }

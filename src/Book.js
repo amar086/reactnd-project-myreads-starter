@@ -1,11 +1,6 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
- 
-class Book extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+class Book extends React.Component {
 
   updateCategory = (value) => {
       this.props.updateCategory(this.props.book.id,value);
@@ -14,7 +9,7 @@ class Book extends React.Component {
 
   render() {
     return (
-                       <div className="book">
+                        <div className="book">
                           <div className="book-top">
                             <div className="book-cover" 
                             style={{ 
@@ -42,5 +37,6 @@ class Book extends React.Component {
                   
         )}
 }
+
 
 export default Book
